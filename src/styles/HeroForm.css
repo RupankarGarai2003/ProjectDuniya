@@ -1,0 +1,195 @@
+/* HeroForm.css */
+
+.hero-section {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 3rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
+  font-family: 'Inter', sans-serif;
+  align-items: center;
+}
+
+@media (max-width: 960px) {
+  .hero-section {
+    grid-template-columns: 1fr;
+    padding: 3rem 1.5rem;
+  }
+  .video-container {
+    order: -1;
+  }
+}
+
+.form-container {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  border-radius: 1.5rem;
+  padding: 1rem;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+  border: 1px solid #0404eb;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.form-container:hover {
+  transform: scale(1.01);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.15);
+}
+
+.title {
+  font-size: 2rem;
+  margin: 1rem 0 1.4rem;
+  color: #0f172a;
+  text-align: center;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 2×2 Grid for Name, Phone, Email, Due Date */
+.input-pair {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+@media (max-width: 600px) {
+  .input-pair {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Labels as mini-headings */
+.label {
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+  color: #0f172a;
+}
+
+/* Inputs & Textarea */
+.input,
+.textarea,
+select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.85rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid #cbd5e1;
+  background: rgba(255, 255, 255, 0.85);
+  transition: border-color 0.3s, box-shadow 0.3s;
+  font-size: 1rem;
+  color: #1e293b;
+}
+.input:focus,
+.textarea:focus,
+select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+  outline: none;
+}
+.textarea {
+  resize: vertical;
+}
+
+/* Submit Button */
+.submit-button {
+  padding: 1rem 1.5rem;
+  background: linear-gradient(to right, #3b82f6, #6366f1);
+  border: none;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.submit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+  background: linear-gradient(to right, #2563eb, #4f46e5);
+}
+
+
+
+
+
+/* —— MARKETING BANNER STYLES —— */
+
+.marketing-container {
+  background: linear-gradient(135deg, #6366f1, #3b82f6);
+  color: white;
+  border-radius: 1rem;
+  padding: 2rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.marketing-content {
+  max-width: 500px;
+  text-align: center;
+}
+
+.marketing-content h3 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.marketing-content p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.offer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.offer-list li {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+
+.cta-button {
+  display: inline-block;
+  background: white;
+  color: #3b82f6;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  text-decoration: none;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.cta-button:hover {
+  background: #f0f9ff;
+  transform: translateY(-2px);
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .marketing-content h3 {
+    font-size: 1.5rem;
+  }
+  .offer-list {
+    gap: 0.3rem;
+  }
+  .cta-button {
+    width: 100%;
+    text-align: center;
+  }
+}

@@ -1,0 +1,122 @@
+/* General section styling */
+.stats-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  max-width: 100%;
+  margin: 0 auto;
+  background-color: #f1f5f9;
+  text-align: center;
+  flex-wrap: nowrap;
+}
+
+/* Stat item container */
+.stat-item {
+  background-color: #ffffff;
+  padding: 20px 15px;
+  border-radius: 30px;
+  box-shadow: 0 2px 3px rgba(4, 206, 102, 0.927);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 180px;
+  margin: 10px;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid transparent;
+  background: linear-gradient(145deg, #e1f5fe, #b3e5fc);
+  z-index: 1;
+}
+
+/* Pulsing effect keyframes */
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0.6;
+  }
+}
+
+/* Hover effect */
+.stat-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+  border: 2px solid #2196f3;
+}
+
+/* Number styling */
+.stat-item h4 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 8px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.stat-item:hover h4 {
+  color: #2196f3;
+  transform: scale(1.1);
+}
+
+/* Label styling */
+.stat-item p {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #000000;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.8;
+  margin-top: 5px;
+}
+
+/* Smooth slide-up animation */
+@keyframes slide-up {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.stat-item {
+  animation: slide-up 0.7s ease-out forwards;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .stats-section {
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+
+  .stat-item h4 {
+    font-size: 2rem;
+  }
+
+  .stat-item p {
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .stat-item h4 {
+    font-size: 1.8rem;
+  }
+
+  .stat-item p {
+    font-size: 0.85rem;
+  }
+}

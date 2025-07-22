@@ -1,0 +1,147 @@
+/* General Section Styling */
+.why-us-section {
+  background-color: #f8f9fa;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.why-us-section h3 {
+  font-size: 2.5em;
+  color: #333;
+  margin-bottom: 30px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* List Styling */
+.why-us-section ul {
+  list-style-type: none;
+  padding-left: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+
+.why-us-section ul li {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  transition: all 0.3s ease;
+  font-size: 1.1em;
+  color: #444;
+  text-align: left;
+  min-height: 120px;
+}
+
+/* Colorful Icons */
+.why-us-section ul li i {
+  font-size: 2em;
+  margin-right: 20px;
+  transition: transform 0.3s ease;
+}
+
+/* Specific Icon Colors */
+.why-us-section ul li:nth-child(1) i {
+  color: #ff6347; /* Tomato color for Creative & Custom Design */
+}
+
+.why-us-section ul li:nth-child(2) i {
+  color: #f39c12; /* Orange for Fast & Scalable Code */
+}
+
+.why-us-section ul li:nth-child(3) i {
+  color: #1abc9c; /* Turquoise for Transparent Communication */
+}
+
+.why-us-section ul li:nth-child(4) i {
+  color: #9b59b6; /* Purple for Experienced Team of Professionals */
+}
+
+.why-us-section ul li:nth-child(5) i {
+  color: #2980b9; /* Blue for Quality & Performance Focused */
+}
+
+.why-us-section ul li:nth-child(6) i {
+  color: #2ecc71; /* Green for Educational Focus */
+}
+
+.why-us-section ul li:nth-child(7) i {
+  color: #e74c3c; /* Red for Project-Based Learning */
+}
+
+.why-us-section ul li:nth-child(8) i {
+  color: #f1c40f; /* Yellow for Comprehensive Resources */
+}
+
+.why-us-section ul li:nth-child(9) i {
+  color: #8e44ad; /* Violet for Hands-On Technical Skills */
+}
+
+.why-us-section ul li:nth-child(10) i {
+  color: #3498db; /* Light Blue for Customer Satisfaction */
+}
+
+.why-us-section ul li:nth-child(11) i {
+  color: #e67e22; /* Carrot Orange for 10% Discount */
+}
+
+.why-us-section ul li:nth-child(12) i {
+  color: #34495e; /* Dark Gray for 24/7 Service */
+}
+
+.why-us-section ul li:nth-child(13) i {
+  color: #16a085; /* Greenish Teal for Special Discount EveryTime */
+}
+
+/* Hover Effect */
+.why-us-section ul li:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.why-us-section ul li:hover i {
+  transform: scale(1.1);
+}
+
+/* Mobile-Friendly Design */
+@media (max-width: 768px) {
+  .why-us-section h3 {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+
+  .why-us-section ul li {
+    padding: 15px;
+    font-size: 1em;
+  }
+
+  .why-us-section ul {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .why-us-section h3 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+  }
+
+  .why-us-section ul li {
+    padding: 10px;
+    font-size: 0.95em;
+  }
+
+  .why-us-section ul {
+    grid-template-columns: 1fr;
+  }
+}
