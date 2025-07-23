@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/ProjectDuniya/static/css/main.bfd1abf1.css",
+    "main.js": "/ProjectDuniya/static/js/main.bb49e37e.js",
+    "static/media/bg.jpg": "/ProjectDuniya/static/media/bg.c7f052d7f89b65312aed.jpg",
+    "index.html": "/ProjectDuniya/index.html",
+    "main.bfd1abf1.css.map": "/ProjectDuniya/static/css/main.bfd1abf1.css.map",
+    "main.bb49e37e.js.map": "/ProjectDuniya/static/js/main.bb49e37e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bfd1abf1.css",
+    "static/js/main.bb49e37e.js"
+  ]
+}
