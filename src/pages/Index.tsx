@@ -1,7 +1,4 @@
-import TopBar from "@/components/TopBar";
-import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-// import Categories from "@/components/Categories";
 import LatestDesign from "@/components/LatestDesign";
 import AboutSection from "@/components/AboutSection";
 import ServicesSection from "@/components/ServicesSection";
@@ -19,11 +16,8 @@ import ScrollToggle from "@/components/ScrollToggle";
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
-      <TopBar />
-      <Header />
       <main>
         <Hero />
-        {/* <Categories /> */}
         <LatestDesign />
         <AboutSection />
         <ServicesSection />

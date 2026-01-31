@@ -3,7 +3,7 @@ import { FaWhatsapp } from "react-icons/fa";
 
 const TopBar = () => {
   return (
-    <div className="relative bg-gradient-to-r from-indigo-600 via-violet-600 to-indigo-700 text-white">
+    <div id="home" className="relative bg-gradient-to-r from-indigo-600 via-violet-600 to-indigo-700 text-white">
       <div className="container mx-auto px-4 py-2">
         <div className="flex flex-col md:flex-row items-center justify-between gap-3 text-xs md:text-sm">
 
