@@ -4,7 +4,7 @@ import { Linkedin, Github } from "lucide-react";
 const teamMembers = [
   {
     name: "Rupankar Garai",
-    image: "src/assets/Rupankar.jpg",
+    image: "/team/Rupankar.jpg",
     desc:
       "4+ Years of Freelancing Experience | Full-Stack Developer | Client Communication & End-to-End Project Delivery | Empowering Academic & Technical Projects with Quality and Clarity",
     linkedin: "#",
@@ -12,7 +12,7 @@ const teamMembers = [
   },
   {
     name: "Sayan Maity",
-    image: "src/assets/sayan.jpg",
+    image: "/team/Sayan.jpg",
     desc:
       "AI & Web Development Specialist | Strong Client Coordination | Requirement Analysis, Regular Updates & Reliable Project Execution | Data Analytics & ML Intern Experience",
     linkedin: "#",
@@ -20,7 +20,7 @@ const teamMembers = [
   },
   {
     name: "Tridib Kamal",
-    image: "/src/assets/tridib.jpg",
+    image: "/team/tridib.jpg",
     desc:
       "Data Analytics & Full-Stack Developer | SQL • ETL • Power BI | Client-Focused Reporting, Clear Insights & On-Time Project Delivery",
     linkedin: "#",
@@ -28,21 +28,21 @@ const teamMembers = [
   },
     {
     name: "Mrinmay Karmakr",
-    image: "src/assets/Mrinmay.jpg",
+    image: "/team/Mrinmay.jpg",
     desc:
       "Legal Expertise Contract Drafting & Review, Compliance Management, Intellectual Property Rights (IPR), and Labour Law",
     linkedin: "#",
   },
   {
     name: "Eman Roy",
-    image: "/src/assets/Eman.png",
+    image: "/team/Eman.png",
     desc:
       "Web Developer | Photography & Creative Editing | Team Collaboration",
     linkedin: "#",
   },
   {
     name: "Arnab Halder",
-    image: "/src/assets/arnab.png",
+    image: "/team/arnab.png",
     desc:
       "Web Developer | React, Java & Modern Web Technologies",
     linkedin: "#",

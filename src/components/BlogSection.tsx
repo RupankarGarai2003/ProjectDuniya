@@ -1,97 +1,139 @@
 import { useState } from "react";
-import blog1 from "@/assets/blog1.png";
-import blog2 from "@/assets/blog2.png";
-import blog3 from "@/assets/blog3.png";
 
-const blogs = [
-  // add as many as you want
-  { title: "Final Year Website Project Successfully Completed", date: "Feb 05, 2025", author: "ProjectDuniya", image: blog1 },
-  { title: "Live Project Guidance Session on Instagram", date: "Feb 10, 2025", author: "ProjectDuniya", image: blog2 },
-  { title: "YouTube Demo: Data Analysis Project Explained", date: "Feb 15, 2025", author: "ProjectDuniya", image: blog3 },
-  { title: "AI & ML Final Year Project Completed", date: "Feb 18, 2025", author: "ProjectDuniya", image: blog1 },
-  { title: "Research Paper Submission Guidance", date: "Feb 20, 2025", author: "ProjectDuniya", image: blog2 },
-  { title: "Python Programming Project Walkthrough", date: "Feb 22, 2025", author: "ProjectDuniya", image: blog3 },
-  { title: "Instagram Reel: Project Explanation Session", date: "Feb 24, 2025", author: "ProjectDuniya", image: blog1 },
-  { title: "Mini Project Submission & Viva Prep", date: "Feb 26, 2025", author: "ProjectDuniya", image: blog2 },
-  { title: "LinkedIn Student Success Story", date: "Feb 28, 2025", author: "ProjectDuniya", image: blog3 },
-  { title: "Data Analytics Live Project Demo", date: "Mar 01, 2025", author: "ProjectDuniya", image: blog1 },
-  { title: "Final Year Website Project Successfully Completed", date: "Feb 05, 2025", author: "ProjectDuniya", image: blog1 },
-  { title: "Live Project Guidance Session on Instagram", date: "Feb 10, 2025", author: "ProjectDuniya", image: blog2 },
-  { title: "YouTube Demo: Data Analysis Project Explained", date: "Feb 15, 2025", author: "ProjectDuniya", image: blog3 },
-  { title: "AI & ML Final Year Project Completed", date: "Feb 18, 2025", author: "ProjectDuniya", image: blog1 },
-  { title: "Research Paper Submission Guidance", date: "Feb 20, 2025", author: "ProjectDuniya", image: blog2 },
-  { title: "Python Programming Project Walkthrough", date: "Feb 22, 2025", author: "ProjectDuniya", image: blog3 },
-  { title: "Instagram Reel: Project Explanation Session", date: "Feb 24, 2025", author: "ProjectDuniya", image: blog1 },
-  { title: "Mini Project Submission & Viva Prep", date: "Feb 26, 2025", author: "ProjectDuniya", image: blog2 },
-  { title: "LinkedIn Student Success Story", date: "Feb 28, 2025", author: "ProjectDuniya", image: blog3 },
-  { title: "Data Analytics Live Project Demo", date: "Mar 01, 2025", author: "ProjectDuniya", image: blog1 },
-    { title: "Final Year Website Project Successfully Completed", date: "Feb 05, 2025", author: "ProjectDuniya", image: blog1 },
-  { title: "Live Project Guidance Session on Instagram", date: "Feb 10, 2025", author: "ProjectDuniya", image: blog2 },
-  { title: "YouTube Demo: Data Analysis Project Explained", date: "Feb 15, 2025", author: "ProjectDuniya", image: blog3 },
-  { title: "AI & ML Final Year Project Completed", date: "Feb 18, 2025", author: "ProjectDuniya", image: blog1 },
-  { title: "Research Paper Submission Guidance", date: "Feb 20, 2025", author: "ProjectDuniya", image: blog2 },
-  { title: "Python Programming Project Walkthrough", date: "Feb 22, 2025", author: "ProjectDuniya", image: blog3 },
-  { title: "Instagram Reel: Project Explanation Session", date: "Feb 24, 2025", author: "ProjectDuniya", image: blog1 },
-  { title: "Mini Project Submission & Viva Prep", date: "Feb 26, 2025", author: "ProjectDuniya", image: blog2 },
-  { title: "LinkedIn Student Success Story", date: "Feb 28, 2025", author: "ProjectDuniya", image: blog3 },
-  { title: "Data Analytics Live Project Demo", date: "Mar 01, 2025", author: "ProjectDuniya", image: blog1 },
-  // page 2 examples
-  { title: "Web App Final Year Project", date: "Mar 03, 2025", author: "ProjectDuniya", image: blog2 },
-  { title: "Power BI Dashboard Project", date: "Mar 05, 2025", author: "ProjectDuniya", image: blog3 },
+const projects = [
+  {
+    title: "Final Year Website Project",
+    date: "Completed on Feb 05, 2025",
+    type: "Web Development",
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
+  },
+  {
+    title: "AI & ML Student Project",
+    date: "Completed on Feb 18, 2025",
+    type: "Artificial Intelligence",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995",
+  },
+  {
+    title: "Python Student Management System",
+    date: "Completed on Feb 22, 2025",
+    type: "Python Project",
+    image: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4",
+  },
+  {
+    title: "Data Analytics Dashboard",
+    date: "Completed on Mar 01, 2025",
+    type: "Data Analysis",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71",
+  },
+  {
+    title: "Power BI Dashboard Project",
+    date: "Completed on Mar 05, 2025",
+    type: "Business Intelligence",
+    image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0",
+  },
+  {
+    title: "Web App Final Year Project",
+    date: "Completed on Mar 03, 2025",
+    type: "Web Development",
+    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
+  },
+  {
+    title: "Research Paper Submission",
+    date: "Completed on Feb 20, 2025",
+    type: "Academic Writing",
+    image: "https://images.unsplash.com/photo-1455390582262-044cdead277a",
+  },
+  {
+    title: "Mini Project & Viva Prep",
+    date: "Completed on Feb 26, 2025",
+    type: "Academic Support",
+    image: "https://images.unsplash.com/photo-1531482615713-2afd69097998",
+  },
+  {
+    title: "LinkedIn Student Success Case",
+    date: "Completed on Feb 28, 2025",
+    type: "Career Support",
+    image: "https://images.unsplash.com/photo-1556761175-b413da4baf72",
+  },
+  {
+    title: "Instagram Project Explanation Session",
+    date: "Completed on Feb 24, 2025",
+    type: "Live Guidance",
+    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f",
+  },
 ];
 
-const BLOGS_PER_PAGE = 10;
+const PROJECTS_PER_PAGE = 10;
 
 const BlogSection = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const totalPages = Math.ceil(blogs.length / BLOGS_PER_PAGE);
-  const startIndex = (currentPage - 1) * BLOGS_PER_PAGE;
-  const currentBlogs = blogs.slice(startIndex, startIndex + BLOGS_PER_PAGE);
+  const totalPages = Math.ceil(projects.length / PROJECTS_PER_PAGE);
+  const startIndex = (currentPage - 1) * PROJECTS_PER_PAGE;
+  const currentProjects = projects.slice(
+    startIndex,
+    startIndex + PROJECTS_PER_PAGE
+  );
 
   return (
-    <section id="blog" className="py-20 bg-[#f6f8f5]">
+    <section id="projects" className="py-20 bg-[#f6f8f5]">
       <div className="container mx-auto px-4">
 
         {/* Heading */}
         <div className="text-center mb-14">
           <h2 className="text-3xl md:text-4xl font-semibold text-navy">
-            Latest Projects & Posts
+            Projects Completed This Month 🚀
           </h2>
           <p className="text-muted-foreground mt-3">
-            Explore recent student projects and guidance sessions
+            Real projects successfully delivered with expert guidance & support
+          </p>
+
+          <p className="text-sm text-green-600 font-medium mt-4">
+            ✔ 50+ Projects Delivered This Month
           </p>
         </div>
 
-        {/* Blog Grid */}
+        {/* Grid */}
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-          {currentBlogs.map((blog, index) => (
+          {currentProjects.map((project, index) => (
             <div
               key={index}
               className="bg-[#fdfefb] rounded-lg overflow-hidden transition hover:-translate-y-1"
             >
-              <div className="aspect-[4/3] overflow-hidden">
+              {/* Image */}
+              <div className="relative aspect-[4/3] overflow-hidden">
                 <img
-                  src={blog.image}
-                  alt={blog.title}
+                  src={project.image}
+                  alt={project.title}
+                  loading="lazy"
                   className="w-full h-full object-cover"
                 />
+
+                {/* Badge */}
+                <span className="absolute top-2 left-2 bg-green-600 text-white text-[10px] px-2 py-1 rounded">
+                  Completed
+                </span>
               </div>
 
+              {/* Content */}
               <div className="p-5">
-                <p className="text-xs text-muted-foreground mb-2">
-                  {blog.date} · {blog.author}
+                <p className="text-xs text-muted-foreground mb-1">
+                  {project.date}
+                </p>
+
+                <p className="text-[11px] text-green-600 font-medium mb-2">
+                  ✔ {project.type}
                 </p>
 
                 <h3 className="text-sm font-medium text-navy mb-3 line-clamp-2">
-                  {blog.title}
+                  {project.title}
                 </h3>
 
                 <a
                   href="#"
                   className="text-xs font-medium text-navy hover:underline"
                 >
-                  Read more →
+                  View Details →
                 </a>
               </div>
             </div>
@@ -113,7 +155,9 @@ const BlogSection = () => {
           </span>
 
           <button
-            onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+            onClick={() => setCurrentPage((p) =>
+              Math.min(p + 1, totalPages)
+            )}
             disabled={currentPage === totalPages}
             className="px-5 py-2 rounded-full border border-border text-sm font-medium disabled:opacity-40 hover:bg-muted transition"
           >
