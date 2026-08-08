@@ -1,0 +1,36 @@
+export const siteConfig = {
+  name: "ProjectDuniya",
+  title: "ProjectDuniya | Final Year Projects, Coding Help & Academic Solutions Worldwide",
+  description:
+    "Get expert help with final year projects, coding assignments, AI, web development, thesis writing, and data analysis - online, for students anywhere in the world. Trusted by 1000+ students. Affordable, fast & reliable.",
+  url: "https://projectduniya.com",
+  ogImage: "https://projectduniya.com/images/ChatGPT-Image-Jan-19-2026-10_46_39-PM.png",
+  phone: "+918391808784",
+  phoneDisplay: "8391808784",
+  email: "projectduniya.help@gmail.com",
+  whatsapp: "https://wa.me/918391808784",
+  instagram: "https://www.instagram.com/projectduniya.help?igsh=aGl6aDdtbzFmaHJs",
+  telegram: "https://t.me/HiringAlertt",
+  facebook: "https://www.facebook.com/profile.php?id=61580355323239",
+  address: "Kolkata, West Bengal, India",
+  areaServed: "Worldwide",
+  keywords: [
+    "final year project help online",
+    "coding help for students",
+    "academic project help online",
+    "python projects for students",
+    "web development projects",
+    "AI and machine learning projects",
+    "thesis writing help",
+    "research paper writing help",
+    "data analysis projects",
+    "resume writing service",
+    "capstone project help",
+    "university project help online",
+    "programming assignment help",
+    "online tutoring for computer science students",
+    "final year project help USA UK Canada Australia",
+  ],
+};
+
+export type SiteConfig = typeof siteConfig;
