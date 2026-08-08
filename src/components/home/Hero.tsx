@@ -55,7 +55,7 @@ const Hero = () => {
             </h1>
 
             <p className="text-slate-600 text-base sm:text-lg leading-relaxed mb-10">
-              We help students and professionals build real-world projects with expert guidance, clear execution, and practical outcomes.
+              From final year projects to coding assignments and research papers, we help students and professionals get real-world work done - entirely online, wherever you are.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">

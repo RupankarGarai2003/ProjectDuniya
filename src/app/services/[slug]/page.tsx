@@ -37,11 +37,23 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    serviceType: service.title,
-    provider: { "@type": "Organization", name: siteConfig.name, url: siteConfig.url },
-    areaServed: "Worldwide",
-    description: service.metaDescription,
+    "@graph": [
+      {
+        "@type": "Service",
+        serviceType: service.title,
+        provider: { "@type": "Organization", name: siteConfig.name, url: siteConfig.url },
+        areaServed: "Worldwide",
+        description: service.metaDescription,
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: service.faqs.map((f) => ({
+          "@type": "Question",
+          name: f.question,
+          acceptedAnswer: { "@type": "Answer", text: f.answer },
+        })),
+      },
+    ],
   };
 
   return (
