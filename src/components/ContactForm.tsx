@@ -13,6 +13,7 @@ function getLocalDateString(date = new Date()): string {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
+
   return `${year}-${month}-${day}`;
 }
 
@@ -115,9 +116,7 @@ const ContactForm = () => {
 
       const firstErrorKey = Object.keys(errs)[0];
 
-      (
-        document.getElementById(id(firstErrorKey)) ?? firstInvalid
-      )?.focus();
+      (document.getElementById(id(firstErrorKey)) ?? firstInvalid)?.focus();
 
       return;
     }
@@ -126,26 +125,41 @@ const ContactForm = () => {
     setStatus("submitting");
     setError("");
 
-    data.set(
-      "_subject",
-      `New ProjectDuniya enquiry: ${String(data.get("service"))}`
-    );
-    data.set("source_page", window.location.href);
+    const service = String(data.get("service") ?? "").trim();
 
     try {
-      const response = await fetch(siteConfig.formEndpoint, {
+      // Send the enquiry to our server-side API, not directly to Google.
+      // The Google Sheets secret must never be included in client-side code.
+      const response = await fetch("/api/contact", {
         method: "POST",
-        body: data,
         headers: {
+          "Content-Type": "application/json",
           Accept: "application/json",
         },
+        body: JSON.stringify({
+          name: String(data.get("name") ?? "").trim(),
+          email: String(data.get("email") ?? "").trim(),
+          phone: String(data.get("phone") ?? "").trim(),
+          service,
+          due_date: String(data.get("due_date") ?? "").trim(),
+          requirements: String(data.get("requirements") ?? "").trim(),
+          source_page: window.location.href,
+        }),
       });
 
-      if (!response.ok) {
-        throw new Error(`Form submission failed: HTTP ${response.status}`);
+      let result: { success?: boolean; message?: string };
+
+      try {
+        result = await response.json();
+      } catch {
+        throw new Error("The server returned an invalid response.");
       }
 
-      const service = String(data.get("service"));
+      if (!response.ok || result.success !== true) {
+        throw new Error(
+          result.message || `Form submission failed: HTTP ${response.status}`
+        );
+      }
 
       trackEvent("contact_form_submit", {
         service,
@@ -157,7 +171,7 @@ const ContactForm = () => {
       setStatus("success");
       setFieldErrors({});
       form.reset();
-    } catch {
+    } catch (submissionError) {
       trackEvent("contact_form_error", {
         page_path: window.location.pathname,
       });
@@ -165,7 +179,10 @@ const ContactForm = () => {
       setStatus("error");
 
       setError(
-        `Sorry, we couldn't send your enquiry. Please try again, or message us on WhatsApp (${siteConfig.phoneDisplay}) or email ${siteConfig.email}.`
+        submissionError instanceof Error &&
+          submissionError.message !== "Failed to fetch"
+          ? `Sorry, we couldn't send your enquiry. Please try again, or message us on WhatsApp (${siteConfig.phoneDisplay}) or email ${siteConfig.email}.`
+          : `Sorry, we couldn't send your enquiry. Please try again, or message us on WhatsApp (${siteConfig.phoneDisplay}) or email ${siteConfig.email}.`
       );
     } finally {
       submitting.current = false;
@@ -220,10 +237,7 @@ const ContactForm = () => {
 
   const err = (key: string) =>
     fieldErrors[key] ? (
-      <p
-        id={id(`${key}-err`)}
-        className="text-xs text-red-600 mt-1"
-      >
+      <p id={id(`${key}-err`)} className="text-xs text-red-600 mt-1">
         {fieldErrors[key]}
       </p>
     ) : null;
@@ -231,9 +245,7 @@ const ContactForm = () => {
   const a11y = (key: string) => ({
     id: id(key),
     "aria-invalid": fieldErrors[key] ? (true as const) : undefined,
-    "aria-describedby": fieldErrors[key]
-      ? id(`${key}-err`)
-      : undefined,
+    "aria-describedby": fieldErrors[key] ? id(`${key}-err`) : undefined,
   });
 
   return (
@@ -258,9 +270,9 @@ const ContactForm = () => {
           >
             <option value="">Select a Service</option>
 
-            {services.map((service) => (
-              <option key={service} value={service}>
-                {service}
+            {services.map((serviceOption) => (
+              <option key={serviceOption} value={serviceOption}>
+                {serviceOption}
               </option>
             ))}
           </select>
