@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import { services } from "@/lib/data/services";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Our Services",
   description:
     "Explore all ProjectDuniya services - final year projects, website & software development, data/AI projects, research writing, and presentation support.",
-  alternates: { canonical: "/services" },
-};
+  path: "/services",
+});
 
 export default function ServicesPage() {
   return (
@@ -30,8 +32,7 @@ export default function ServicesPage() {
                 className="bg-card rounded-2xl p-6 flex flex-col sm:flex-row items-start gap-6 card-hover border border-border group"
               >
                 <div className="w-28 h-28 flex-shrink-0">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={service.image} alt={service.title} className="w-full h-full object-contain" />
+                  <Image src={service.image} alt="" width={112} height={112} className="w-full h-full object-contain" />
                 </div>
                 <div className="flex-1">
                   <span className="text-xs font-semibold text-primary uppercase tracking-wide">{service.category}</span>

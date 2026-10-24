@@ -1,60 +1,69 @@
-# ProjectDuniya — Next.js Edition
+# ProjectDuniya
 
-This is a full rebuild of the original ProjectDuniya Vite/React single-page site as a **Next.js 14 (App Router)** project — with real, separately-indexable pages, per-page SEO metadata, structured data (JSON-LD), a sitemap, and several brand-new content pages designed to bring in organic search traffic.
+Marketing and lead-generation website for ProjectDuniya (final year project help, coding help, academic guidance).
+Built with **Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS 3 · Radix UI**.
 
-## What changed vs. the old site
+## Requirements
 
-The original site was a single-page Vite app using `HashRouter` — everything lived on one URL (`/#services`, `/#about`, etc.), which search engines can't index as separate pages. This rebuild gives every section and every service its own real, crawlable URL, rendered as static HTML at build time.
+- Node.js **>= 20.9** (Node 22 LTS recommended) and npm 10+
 
-## New pages added (beyond the original one-pager)
-
-- `/about`, `/contact`, `/pricing`, `/faq`, `/team`, `/testimonials`
-- `/services` and 8 dynamic `/services/[slug]` pages (one per service, each with its own title, description, FAQs, and "how it works" section)
-- `/projects` → `/projects/[category]` → `/projects/[category]/[item]` — a 3-level dynamic catalogue covering all 18 sub-services
-- `/blog` and 6 original long-form articles at `/blog/[slug]` (project ideas, topic selection, Python vs Java, viva prep, data analysis for beginners, research paper writing)
-- `/project-ideas` — brings the previously external project-ideas link in-house
-- `/locations` and 8 dynamic `/locations/[city]` local-SEO pages (Kolkata, Delhi, Mumbai, Bangalore, Pune, Hyderabad, Chennai, Noida)
-
-**61 static pages** are generated at build time in total.
-
-## SEO features included
-
-- Per-page `<title>`, meta description, canonical URL, Open Graph & Twitter cards (via Next's Metadata API)
-- JSON-LD structured data: `Organization` (site-wide), `Service` (each service page), `BlogPosting` (each article), `FAQPage` (FAQ page)
-- Auto-generated `sitemap.xml` (`src/app/sitemap.ts`) and `robots.txt` (`src/app/robots.ts`) that stay in sync with your data files automatically
-- Semantic heading structure, descriptive alt text, and internal linking between services, categories, blog posts, and location pages
-
-## Editing content
-
-All editable content lives in `src/lib/data/`:
-
-| File | Controls |
-|---|---|
-| `services.ts` | The 8 `/services/[slug]` pages |
-| `categories.ts` | The `/projects` catalogue (categories + sub-services) |
-| `blog.ts` | Blog articles |
-| `locations.ts` | City landing pages |
-| `faqs.ts` | FAQ page + homepage FAQ preview |
-| `testimonials.ts` | Reviews |
-| `team.ts` | Team page |
-
-`src/lib/site.ts` holds site-wide constants (phone, email, social links, WhatsApp number) — update these once and they update everywhere.
-
-## Running locally
+## Commands
 
 ```bash
-npm install
-npm run dev      # http://localhost:3000
-npm run build    # production build (already verified to succeed)
-npm start         # serve the production build
+npm install        # install (keep package-lock.json committed)
+npm run dev        # local dev server on http://localhost:3000
+npm run lint       # ESLint (flat config, eslint-config-next)
+npm run typecheck  # tsc --noEmit
+npm run build      # production build
+npm start          # serve the production build
 ```
 
-## Deploying
+Run `lint`, `typecheck` and `build` before every deploy.
 
-This project is ready to deploy to **Vercel** (recommended — zero config for Next.js), or any Node hosting that supports Next.js. Once deployed, update `siteConfig.url` in `src/lib/site.ts` to your live domain so canonical URLs and the sitemap are correct.
+## Routes (all statically generated)
 
-## Known follow-ups
+| Route | Data source |
+| --- | --- |
+| `/`, `/about`, `/pricing`, `/faq`, `/contact`, `/team`, `/testimonials`, `/project-ideas` | page files + `src/lib/data/*` |
+| `/services`, `/services/[slug]` | `src/lib/data/services.ts` |
+| `/projects`, `/projects/[category]`, `/projects/[category]/[item]` | `src/lib/data/categories.ts` |
+| `/blog`, `/blog/[slug]` | `src/lib/data/blog.ts` |
+| `/locations`, `/locations/[country]` | `src/lib/data/countries.ts` |
+| `/privacy`, `/terms`, `/refund-policy`, `/academic-integrity` | page files (`LegalPage` component) |
 
-- The `next` version here (14.2.35) has a couple of known high-severity advisories that are only fully resolved in Next.js 16, which has breaking changes. Worth planning an upgrade after launch.
-- The contact form still posts to the original Formspree endpoint (`meoarbod`) — swap this for your own endpoint if you want form submissions routed elsewhere.
-- Pricing numbers on `/pricing` are placeholders ("Starting ₹...") — replace with your real starting prices.
+City/state URLs (`/locations/[country]/[place]`) were retired: they permanently (308) redirect to the country page (see `next.config.mjs`).
+
+## Where to edit things
+
+- **Site constants, contact details, claims, promo banner:** `src/lib/site.ts`. Only keep numbers you can substantiate (`claims.projectsLabel`, `claims.experienceLabel`). Set `promo.active = false` when the offer ends.
+- **Blog posts:** `src/lib/data/blog.ts`. Content blocks are markdown-lite: `## H2`, `### H3`, `- bullets`, `1. numbered`, `**bold**`, `[text](/internal-link)`. Set `updated` when you materially revise a post (feeds `dateModified` and the sitemap). Every post needs a `serviceSlug` (Blog -> Service path) and a cover image in `public/og/`.
+- **Team / testimonials / FAQs:** `src/lib/data/team.ts`, `testimonials.ts`, `faqs.ts`. Omit `linkedin`/`github` if a profile doesn't exist; nothing is rendered for missing links.
+
+## SEO
+
+- Per-page metadata is built with `pageMeta()` in `src/lib/seo.ts` (title, description, canonical, Open Graph, Twitter). **Pass the title without the brand**; the layout template appends ` | ProjectDuniya`.
+- Canonical host is `https://www.projectduniya.com` (`siteConfig.url`). Make sure the apex domain 301-redirects to `www` in your hosting/DNS settings.
+- `src/app/sitemap.ts` lists canonical, 200-status URLs only. `src/app/robots.ts` allows everything and points at the sitemap.
+- Structured data: Organization + WebSite (layout), BlogPosting (posts), Service (+ FAQPage where the FAQ is visible), BreadcrumbList (all inner pages).
+- Default social image: `public/og-default.jpg` (1200x630). Article covers: `public/og/`.
+- **Do not rename or delete** `/blog/top-final-year-project-ideas-computer-science-2026`; it is the site's main organic landing page. Improve it in place.
+
+## Analytics (GA4) and forms
+
+- GA4 ID is in `siteConfig.gaId`. Events sent: `contact_form_start`, `contact_form_submit`, `quote_request`, `contact_form_error`, `whatsapp_click`, `phone_click`, `email_click`, plus `*_cta_click` events from any link with a `data-track="event_name"` attribute (see `AnalyticsEvents.tsx`).
+- In GA4: mark `contact_form_submit`, `quote_request`, `whatsapp_click`, `phone_click`, `email_click` as **Key events**, and verify them in DebugView after each deploy.
+- Contact form (`src/components/ContactForm.tsx`) posts via `fetch` to the Formspree endpoint in `siteConfig.formEndpoint`, with client-side validation, a honeypot field, loading/success/error states and double-submit protection. In the Formspree dashboard: confirm you own the form, enable reCAPTCHA/spam filtering and restrict allowed domains to `projectduniya.com`/`www.projectduniya.com`.
+
+## Security
+
+`next.config.mjs` sets HSTS, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy` and `Permissions-Policy`. A **Content-Security-Policy** is intentionally not set yet: design it after auditing Google Analytics, Formspree and the inline JSON-LD (use a nonce/hash approach, start in report-only mode).
+
+## Performance notes
+
+- Poppins is self-hosted (`src/app/fonts`, `next/font/local`), so there is no Google Fonts request.
+- The hero renders a single illustration at a time and only preloads the next one.
+- Use `next/image` for all images; keep raster assets small and in `public/images` only if referenced.
+
+## Deployment
+
+Any Next.js host works (Vercel recommended). Build command `npm run build`, output handled by Next. After each deploy, check: contact form submission, GA4 events, `/sitemap.xml`, `/robots.txt`, canonical tags on a few pages, and Search Console inspection of the homepage and the main blog post.

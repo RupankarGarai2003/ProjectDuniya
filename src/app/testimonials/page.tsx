@@ -1,21 +1,22 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import { Star } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import { testimonials } from "@/lib/data/testimonials";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Student Reviews & Testimonials",
   description:
     "Read what students from around the world say about ProjectDuniya's final year project help, coding support, and academic guidance.",
-  alternates: { canonical: "/testimonials" },
-};
+  path: "/testimonials",
+});
 
 export default function TestimonialsPage() {
   return (
     <main>
       <PageHeader
         title="What Students Say About ProjectDuniya"
-        description="Real feedback from students we've helped across final year projects, coding, data analysis, and thesis writing."
+        description="Feedback from students we've worked with across final year projects, coding, data analysis, and thesis writing."
         crumbs={[{ label: "Testimonials" }]}
       />
 
@@ -26,10 +27,10 @@ export default function TestimonialsPage() {
               <div key={i} className="bg-card rounded-2xl p-6 shadow-lg card-hover">
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <h4 className="font-bold text-navy">{t.name}</h4>
+                    <h2 className="font-bold text-navy">{t.name}</h2>
                     <p className="text-sm text-muted-foreground">{t.role}</p>
                   </div>
-                  <div className="flex">
+                  <div className="flex" role="img" aria-label={`Rated ${t.rating} out of 5`}>
                     {[...Array(5)].map((_, star) => (
                       <Star key={star} className={`w-4 h-4 ${star < Math.floor(t.rating) ? "fill-yellow-500 text-yellow-500" : "fill-yellow-500/30 text-yellow-500"}`} />
                     ))}

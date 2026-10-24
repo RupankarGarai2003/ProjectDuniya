@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import PageHeader from "@/components/PageHeader";
 import { Check } from "lucide-react";
 import { siteConfig } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Pricing - Affordable Project Help for Students",
   description:
     "Transparent, student-friendly pricing for final year projects, coding help, data analysis, thesis writing, and presentation design. Get a free custom quote.",
-  alternates: { canonical: "/pricing" },
-};
+  path: "/pricing",
+});
 
 const plans = [
   {
@@ -25,7 +26,7 @@ const plans = [
     range: "Starting $69",
     rangeSub: "(₹4,999 for students in India)",
     desc: "Our most popular tier - complete final year project with full guidance.",
-    features: ["Full source code + explanation", "IEEE-format report & synopsis", "PPT + viva question prep", "Unlimited clarification calls", "Priority support till submission"],
+    features: ["Full source code + explanation", "IEEE-format report & synopsis", "PPT + viva question prep", "Clarification calls until submission", "Priority support till submission"],
     highlighted: true,
   },
   {
@@ -33,7 +34,7 @@ const plans = [
     range: "Starting $89",
     rangeSub: "(₹6,999 for students in India)",
     desc: "For postgraduate research work needing structured academic writing.",
-    features: ["Literature review & methodology", "IEEE / APA / MLA formatting", "Plagiarism check report", "Chapter-wise revisions", "Confidential handling"],
+    features: ["Literature review & methodology", "IEEE / APA / MLA formatting", "Plagiarism check report", "Chapter-wise revisions", "Confidential handling of your files"],
   },
 ];
 
@@ -59,19 +60,19 @@ export default function PricingPage() {
                 {plan.highlighted && (
                   <span className="badge-pill badge-coral self-start mb-4 text-xs">MOST POPULAR</span>
                 )}
-                <h3 className="text-xl font-bold text-navy mb-1">{plan.name}</h3>
+                <h2 className="text-xl font-bold text-navy mb-1">{plan.name}</h2>
                 <p className="text-2xl font-extrabold text-primary mb-0">{plan.range}</p>
                 <p className="text-xs text-muted-foreground mb-3">{plan.rangeSub}</p>
                 <p className="text-sm text-muted-foreground mb-6">{plan.desc}</p>
                 <ul className="space-y-3 mb-8 flex-1">
                   {plan.features.map((f) => (
                     <li key={f} className="flex items-center gap-2 text-sm text-navy">
-                      <Check className="w-4 h-4 text-secondary flex-shrink-0" /> {f}
+                      <Check className="w-4 h-4 text-secondary flex-shrink-0" aria-hidden="true" /> {f}
                     </li>
                   ))}
                 </ul>
                 <Button asChild className="w-full">
-                  <Link href="/contact">Get Exact Quote</Link>
+                  <Link href="/contact" data-track="pricing_quote_click">Get Exact Quote</Link>
                 </Button>
               </div>
             ))}

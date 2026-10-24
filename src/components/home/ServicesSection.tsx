@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { services } from "@/lib/data/services";
 
@@ -9,7 +10,7 @@ const ServicesSection = () => {
         <div className="text-center mb-16">
           <span className="badge-pill badge-coral mb-6 inline-block">OUR SERVICES</span>
           <h2 className="section-title text-2xl md:text-3xl">
-            Trending Project Requests (Students&apos; Choice)
+            Popular Project Help Services
           </h2>
         </div>
 
@@ -21,8 +22,7 @@ const ServicesSection = () => {
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="w-32 h-32 flex-shrink-0">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={service.image} alt={service.title} className="w-full h-full object-contain" />
+                <Image src={service.image} alt="" width={128} height={128} className="w-full h-full object-contain" />
               </div>
               <div className="flex-1">
                 <h3 className="text-xl font-bold text-navy mb-3">{service.title}</h3>

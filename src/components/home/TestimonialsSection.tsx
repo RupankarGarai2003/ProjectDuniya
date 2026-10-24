@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { testimonials } from "@/lib/data/testimonials";
 
@@ -20,8 +21,7 @@ const TestimonialsSection = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row items-start gap-12">
           <div className="hidden lg:block w-48 flex-shrink-0">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/testimonial-mugs.png" alt="Student feedback" className="w-full animate-float" />
+            <Image src="/images/testimonial-mugs.png" alt="" width={192} height={192} className="w-full h-auto animate-float" />
           </div>
 
           <div className="flex-1">
@@ -32,16 +32,16 @@ const TestimonialsSection = () => {
               </h2>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-6" aria-live="polite">
               {visible.map((t, i) => (
                 <div key={i} className="bg-card rounded-2xl p-6 shadow-lg card-hover animate-fade-in-up">
                   <div className="flex items-center justify-between mb-4">
                     <div>
-                      <h4 className="font-bold text-navy">{t.name}</h4>
+                      <h3 className="font-bold text-navy">{t.name}</h3>
                       <p className="text-sm text-muted-foreground">{t.role}</p>
                     </div>
                     <div className="flex items-center gap-2">
-                      <div className="flex">
+                      <div className="flex" role="img" aria-label={`Rated ${t.rating} out of 5`}>
                         {[...Array(5)].map((_, star) => (
                           <Star
                             key={star}
@@ -51,7 +51,7 @@ const TestimonialsSection = () => {
                           />
                         ))}
                       </div>
-                      <span className="text-sm font-semibold text-navy">{t.rating}</span>
+                      <span className="text-sm font-semibold text-navy" aria-hidden="true">{t.rating}</span>
                     </div>
                   </div>
                   <p className="text-muted-foreground italic line-clamp-4">&ldquo;{t.content}&rdquo;</p>
@@ -65,7 +65,7 @@ const TestimonialsSection = () => {
               </button>
               <div className="flex gap-2">
                 {Array.from({ length: maxIndex + 1 }).map((_, i) => (
-                  <div key={i} className={`w-8 h-2 rounded-full ${i === index ? "bg-primary" : "bg-navy/30"}`} />
+                  <div key={i} aria-hidden="true" className={`w-8 h-2 rounded-full ${i === index ? "bg-primary" : "bg-navy/30"}`} />
                 ))}
               </div>
               <button onClick={handleNext} className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-muted transition" aria-label="Next testimonials">

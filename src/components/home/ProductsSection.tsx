@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { categories } from "@/lib/data/categories";
 
@@ -13,10 +14,10 @@ const ProductsSection = () => {
     <section id="products" className="py-20 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <span className="badge-pill badge-coral mb-6 inline-block">OUR SERVICES</span>
-          <h2 className="section-title mb-8">Explore Our All Services</h2>
+          <span className="badge-pill badge-coral mb-6 inline-block">ALL CATEGORIES</span>
+          <h2 className="section-title mb-8">Explore All Our Services</h2>
 
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="flex flex-wrap justify-center gap-3" role="group" aria-label="Service categories">
             {categories.map((category) => (
               <Button
                 key={category.slug}
@@ -24,6 +25,7 @@ const ProductsSection = () => {
                 className={`rounded-full px-6 ${
                   activeCategory === category.slug ? "bg-coral hover:bg-coral/90" : "border-border text-foreground hover:bg-muted"
                 }`}
+                aria-pressed={activeCategory === category.slug}
                 onClick={() => setActiveCategory(category.slug)}
               >
                 {category.name}
@@ -41,18 +43,16 @@ const ProductsSection = () => {
               style={{ animationDelay: `${index * 0.05}s` }}
             >
               <div className="relative mb-4 aspect-square flex items-center justify-center">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={product.image}
-                  alt={product.name}
+                  alt=""
+                  width={240}
+                  height={240}
                   className="w-[75%] h-[75%] object-contain transition-transform duration-500 group-hover:scale-110"
                 />
               </div>
               <h3 className="font-semibold text-navy text-center">{product.name}</h3>
-              <div className="flex justify-center items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-green-500"></span>
-                <span className="text-sm text-green-600 font-semibold">{product.count} Projects Completed</span>
-              </div>
+              <p className="text-sm text-muted-foreground text-center mt-1">Get a quote →</p>
             </Link>
           ))}
         </div>

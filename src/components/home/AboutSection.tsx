@@ -1,154 +1,168 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Check, Play } from "lucide-react";
+import { Check } from "lucide-react";
 import { siteConfig } from "@/lib/site";
 
 const features = [
-  "Clear Concept Explanation",
-  "On-Time Project Completion",
-  "Budget-Friendly Student Pricing",
-  "Confidential & Original Deliverables",
+  "Clear concept explanation",
+  "Timelines agreed up front",
+  "Budget-friendly student pricing",
+  "Confidential handling of your details",
 ];
 
-const projectNotes = [
-  ["Connected with student via WhatsApp", "Project Type: Final Year Web Application", "Program: Computer Science", "Tech Stack: React, Node.js, MongoDB", "Features: Login, Dashboard, Admin Panel", "Documentation & Viva/Defense Support included", "Deadline: 3 Weeks", "Status: In Progress"],
-  ["Requirement received through website form", "Project Type: Data Analysis Project", "Tools Used: Python, Pandas, NumPy", "Visualization: Power BI Dashboard", "Dataset: Sales & Customer Data", "Insights report prepared", "Deadline: 10 Days", "Status: Working on Dashboard"],
-  ["Client discussion completed via call", "Project Type: AI / ML Mini Project", "Algorithm: Random Forest & Decision Tree", "Dataset: Kaggle Dataset", "Accuracy optimization in progress", "Report & PPT included", "Deadline: 2 Weeks", "Status: Ready for Review"],
-  ["Student contacted through Instagram DM", "Project Type: Python Programming Project", "Concepts: File Handling, OOP, Functions", "Use Case: Student Management System", "Code explanation session scheduled", "Documentation prepared", "Deadline: 7 Days", "Status: In Development"],
-  ["Requirement shared via Telegram", "Project Type: Web Design Project", "Technology: HTML, CSS, JavaScript", "Design: Responsive & Mobile-Friendly", "Pages: Home, About, Services, Contact", "SEO basics applied", "Deadline: 5 Days", "Status: Layout Completed"],
+// Illustrative examples of how typical requests are scoped. These are NOT live client
+// data - the panel is labelled as an example so nobody mistakes it for real-time activity.
+const workflows = [
+  {
+    tab: "Web app",
+    title: "Final-year web application",
+    lines: [
+      "Typical stack: React, Node.js, MongoDB",
+      "Typical features: login, dashboard, admin panel",
+      "Deliverables: source code, report, PPT",
+      "Viva / defense preparation included",
+      "Typical timeline: 2-4 weeks, scoped per request",
+    ],
+  },
+  {
+    tab: "Data analysis",
+    title: "Data analysis project",
+    lines: [
+      "Typical tools: Python, Pandas, NumPy",
+      "Visualization: Power BI or Python dashboards",
+      "Dataset: your data or a public dataset",
+      "Deliverables: insights report and explanation session",
+      "Typical timeline: 1-2 weeks, scoped per request",
+    ],
+  },
+  {
+    tab: "AI / ML",
+    title: "AI / ML mini project",
+    lines: [
+      "Typical methods: Random Forest, Decision Tree, regression",
+      "Dataset: public datasets such as Kaggle",
+      "Model tuning and evaluation metrics",
+      "Deliverables: code, report, PPT",
+      "Typical timeline: 1-3 weeks, scoped per request",
+    ],
+  },
+  {
+    tab: "Python",
+    title: "Python programming project",
+    lines: [
+      "Typical concepts: file handling, OOP, functions",
+      "Example use case: student management system",
+      "Code explanation session",
+      "Deliverables: documented code",
+      "Typical timeline: about a week, scoped per request",
+    ],
+  },
+  {
+    tab: "Website",
+    title: "Responsive website project",
+    lines: [
+      "Typical technology: HTML, CSS, JavaScript",
+      "Design: responsive and mobile-friendly",
+      "Typical pages: Home, About, Services, Contact",
+      "Basic SEO applied",
+      "Typical timeline: under a week, scoped per request",
+    ],
+  },
 ];
 
 const AboutSection = () => {
-  const [projectIndex, setProjectIndex] = useState(0);
-  const [lineIndex, setLineIndex] = useState(0);
-  const [charIndex, setCharIndex] = useState(0);
-  const [displayLines, setDisplayLines] = useState<string[]>([]);
-
-  useEffect(() => {
-    const currentProject = projectNotes[projectIndex];
-    const currentLine = currentProject[lineIndex];
-    const typingSpeed = 55;
-    const lineDelay = 900;
-    const projectDelay = 1500;
-
-    if (charIndex < currentLine.length) {
-      const timeout = setTimeout(() => {
-        setDisplayLines((prev) => {
-          const updated = [...prev];
-          updated[lineIndex] = (updated[lineIndex] || "") + currentLine[charIndex];
-          return updated;
-        });
-        setCharIndex(charIndex + 1);
-      }, typingSpeed);
-      return () => clearTimeout(timeout);
-    } else {
-      const timeout = setTimeout(() => {
-        if (lineIndex < currentProject.length - 1) {
-          setLineIndex(lineIndex + 1);
-          setCharIndex(0);
-        } else {
-          setTimeout(() => {
-            setDisplayLines([]);
-            setLineIndex(0);
-            setCharIndex(0);
-            setProjectIndex((projectIndex + 1) % projectNotes.length);
-          }, projectDelay);
-        }
-      }, lineDelay);
-      return () => clearTimeout(timeout);
-    }
-  }, [charIndex, lineIndex, projectIndex]);
+  const [active, setActive] = useState(0);
+  const current = workflows[active];
 
   return (
     <section id="about" className="py-24 bg-light-purple/30">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div>
-            <div className="w-full max-w-xl lg:max-w-2xl bg-[#0f172a] rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-[0_0_60px_rgba(16,185,129,0.15)]">
+            <div className="w-full max-w-xl lg:max-w-2xl bg-[#0f172a] rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
               <div className="flex items-center gap-3 px-5 py-3 bg-[#020617] border-b border-white/10">
-                <span className="w-3 h-3 rounded-full bg-red-500 animate-dot" />
-                <span className="w-3 h-3 rounded-full bg-yellow-400 animate-dot [animation-delay:0.2s]" />
-                <span className="w-3 h-3 rounded-full bg-green-500 animate-dot [animation-delay:0.4s]" />
-                <span className="ml-3 text-xs font-medium text-slate-300 tracking-wide">
-                  {siteConfig.name} — Live Project Notes
-                </span>
-                <span className="ml-auto flex items-center gap-1 text-[10px] text-emerald-400">
-                  <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
-                  LIVE
+                <span className="w-3 h-3 rounded-full bg-red-500" aria-hidden="true" />
+                <span className="w-3 h-3 rounded-full bg-yellow-400" aria-hidden="true" />
+                <span className="w-3 h-3 rounded-full bg-green-500" aria-hidden="true" />
+                <h2 className="ml-3 text-xs font-medium text-slate-200 tracking-wide">
+                  Typical Project Workflow
+                </h2>
+                <span className="ml-auto text-[10px] font-semibold uppercase tracking-wider text-slate-300 border border-slate-600 rounded px-2 py-0.5">
+                  Example
                 </span>
               </div>
 
-              <div className="p-6 font-mono text-sm leading-relaxed text-slate-200 min-h-[320px] bg-gradient-to-br from-[#0f172a] to-[#020617] relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/5 via-transparent to-sky-500/5 pointer-events-none" />
-                <div className="relative z-10">
-                  {displayLines.map((line, i) => {
-                    const isStatus = line.toLowerCase().includes("status");
-                    const isTitle = line.toLowerCase().includes("project type");
-                    const isStack = line.toLowerCase().includes("tech") || line.toLowerCase().includes("tools");
-                    return (
-                      <p
-                        key={i}
-                        className={`mb-2 flex items-start gap-3 ${
-                          isStatus ? "text-emerald-400 font-semibold" : isTitle ? "text-sky-300 font-semibold" : isStack ? "text-indigo-300" : "text-slate-200"
-                        }`}
-                      >
-                        <span className="text-emerald-400 select-none">›</span>
-                        <span>
-                          {line}
-                          {i === lineIndex && <span className="inline-block w-2 h-4 bg-emerald-400 ml-1 animate-pulse rounded-sm" />}
-                        </span>
-                      </p>
-                    );
-                  })}
-                </div>
-                <div className="absolute bottom-0 left-0 w-full px-6 py-3 border-t border-white/10 bg-black/30 backdrop-blur flex items-center justify-between text-xs text-slate-400">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    Live project update in progress
-                  </div>
-                  <span className="text-emerald-400 font-medium">REAL STUDENT PROJECT</span>
-                </div>
+              <div role="tablist" aria-label="Example project types" className="flex flex-wrap gap-2 px-5 pt-4 bg-gradient-to-br from-[#0f172a] to-[#020617]">
+                {workflows.map((w, i) => (
+                  <button
+                    key={w.tab}
+                    role="tab"
+                    id={`workflow-tab-${i}`}
+                    aria-selected={i === active}
+                    aria-controls="workflow-panel"
+                    onClick={() => setActive(i)}
+                    className={`rounded-full px-3 py-1 text-xs font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-300 ${
+                      i === active ? "bg-sky-300 text-slate-900" : "bg-white/10 text-slate-200 hover:bg-white/20"
+                    }`}
+                  >
+                    {w.tab}
+                  </button>
+                ))}
+              </div>
+
+              <div
+                id="workflow-panel"
+                role="tabpanel"
+                aria-labelledby={`workflow-tab-${active}`}
+                className="p-6 font-mono text-sm leading-relaxed text-slate-200 min-h-[300px] bg-gradient-to-br from-[#0f172a] to-[#020617]"
+              >
+                <p className="mb-4 text-sky-300 font-semibold">{current.title}</p>
+                <ul className="space-y-2">
+                  {current.lines.map((line) => (
+                    <li key={line} className="flex items-start gap-3">
+                      <span className="text-emerald-400 select-none" aria-hidden="true">›</span>
+                      <span>{line}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
-            <p className="mt-3 text-xs text-slate-500 text-center">
-              Showing real, anonymized student project progress in real time.
+            <p className="mt-3 text-xs text-slate-600 text-center">
+              Illustrative examples of how we scope common requests - not live client activity. Final scope and timeline are confirmed in your quote.
             </p>
           </div>
 
           <div>
             <span className="badge-pill badge-secondary mb-6 inline-block">ABOUT US</span>
             <h2 className="text-2xl lg:text-3xl font-bold text-navy leading-[1.2] mb-6">
-              A Smarter Way to Build Academic & Technical Projects
+              A Smarter Way to Build Academic &amp; Technical Projects
             </h2>
             <p className="text-muted-foreground mb-8 max-w-lg">
               We guide students step-by-step to build real-world projects that meet academic standards, industry expectations, and tight deadlines — with clarity and confidence.
             </p>
 
-            <div className="flex items-center gap-10 mb-10">
-              <Link href="/about" className="relative w-48 h-32 rounded-xl overflow-hidden group block">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/images/product-card1.png" alt="Project guidance preview" className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-secondary/30 flex items-center justify-center">
-                  <Play className="w-6 h-6 text-white" />
-                </div>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-8 mb-10">
+              <Link href="/about" className="relative w-48 h-32 rounded-xl overflow-hidden block flex-shrink-0 bg-white border border-border" aria-label="Learn more about ProjectDuniya">
+                <Image src="/images/Group-discussion-amico.svg" alt="Illustration of students discussing a project" fill sizes="192px" className="object-contain p-2" />
               </Link>
 
-              <div className="grid gap-3">
+              <ul className="grid gap-3">
                 {features.map((feature) => (
-                  <div key={feature} className="flex items-center gap-3">
-                    <Check className="w-4 h-4 text-secondary" />
+                  <li key={feature} className="flex items-center gap-3">
+                    <Check className="w-4 h-4 text-secondary" aria-hidden="true" />
                     <span className="text-sm font-medium text-navy">{feature}</span>
-                  </div>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
 
             <div className="flex flex-wrap gap-4">
               <Button asChild><Link href="/services">All Services</Link></Button>
-              <Button asChild><Link href="/contact">Get Custom Project</Link></Button>
+              <Button asChild><Link href="/contact" data-track="about_cta_click">Get Custom Project</Link></Button>
               <Button asChild variant="outline">
                 <a href={siteConfig.whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp</a>
               </Button>

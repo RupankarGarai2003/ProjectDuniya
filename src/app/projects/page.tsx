@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import { categories } from "@/lib/data/categories";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Project Categories",
   description:
     "Browse ProjectDuniya's project categories - Development & Coding, Data/AI & Analytics, Research & Writing, and Academic & Career Support.",
-  alternates: { canonical: "/projects" },
-};
+  path: "/projects",
+});
 
 export default function ProjectsPage() {
   return (

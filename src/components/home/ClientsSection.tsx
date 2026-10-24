@@ -1,3 +1,4 @@
+import { siteConfig } from "@/lib/site";
 import {
   GraduationCap,
   Code2,
@@ -40,12 +41,11 @@ const ClientsSection = () => {
       <div className="container mx-auto px-4">
         {/* Heading */}
         <div className="text-center mb-14">
-          <h3 className="text-2xl md:text-3xl font-extrabold text-navy">
-            Trusted by Students & Professionals
-          </h3>
+          <h2 className="text-2xl md:text-3xl font-extrabold text-navy">
+            Who We Help
+          </h2>
           <p className="text-muted-foreground mt-3 max-w-xl mx-auto">
-            Empowering academic and technical success for students worldwide with expert
-            guidance and real-world project experience.
+            Academic and technical project guidance for students worldwide, plus freelancers and startups who need dependable technical support.
           </p>
         </div>
 
@@ -73,9 +73,9 @@ const ClientsSection = () => {
                   <Icon className="w-7 h-7 text-primary" />
                 </div>
 
-                <h4 className="font-semibold text-navy mb-1">
+                <h3 className="font-semibold text-navy mb-1">
                   {item.title}
-                </h4>
+                </h3>
                 <p className="text-sm text-muted-foreground">
                   {item.desc}
                 </p>
@@ -84,25 +84,25 @@ const ClientsSection = () => {
           })}
         </div>
 
-        {/* Stats */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-          <div>
-            <p className="text-3xl font-extrabold text-primary">1000+</p>
-            <p className="text-sm text-muted-foreground">Projects Completed</p>
-          </div>
-          <div>
-            <p className="text-3xl font-extrabold text-primary">24/7</p>
-            <p className="text-sm text-muted-foreground">Expert Support</p>
-          </div>
-          <div>
-            <p className="text-3xl font-extrabold text-primary">100%</p>
-            <p className="text-sm text-muted-foreground">Confidential</p>
-          </div>
-          <div>
-            <p className="text-3xl font-extrabold text-primary">4+ Years</p>
+        {/* Facts - edit the values in src/lib/site.ts (claims) and keep only what you can substantiate */}
+        <ul className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <li>
+            <p className="text-3xl font-extrabold text-primary">{siteConfig.claims.projectsLabel}</p>
+            <p className="text-sm text-muted-foreground">Projects Delivered</p>
+          </li>
+          <li>
+            <p className="text-3xl font-extrabold text-primary">{siteConfig.claims.experienceLabel}</p>
             <p className="text-sm text-muted-foreground">Experience</p>
-          </div>
-        </div>
+          </li>
+          <li>
+            <p className="text-3xl font-extrabold text-primary">WhatsApp</p>
+            <p className="text-sm text-muted-foreground">Call &amp; Email Support</p>
+          </li>
+          <li>
+            <p className="text-3xl font-extrabold text-primary">Confidential</p>
+            <p className="text-sm text-muted-foreground">Handling of Your Details</p>
+          </li>
+        </ul>
       </div>
     </section>
   );

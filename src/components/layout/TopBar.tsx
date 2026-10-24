@@ -16,8 +16,8 @@ const TopBar = () => {
       <div className="container mx-auto px-4 py-2">
         <div className="flex flex-col md:flex-row items-center justify-between gap-3 text-xs md:text-sm">
           <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-5 opacity-95">
-            <a href={`mailto:${siteConfig.email}`} className="flex items-center gap-2 hover:opacity-80 transition">
-              <Mail className="w-4 h-4" />
+            <a href={`mailto:${siteConfig.email}`} aria-label={`Email ${siteConfig.email}`} className="flex items-center gap-2 hover:opacity-80 transition">
+              <Mail className="w-4 h-4" aria-hidden="true" />
               <span className="hidden sm:inline">{siteConfig.email}</span>
             </a>
             <span className="hidden sm:inline-block h-4 w-px bg-white/30" />
@@ -27,11 +27,13 @@ const TopBar = () => {
             </div>
           </div>
 
-          <div className="hidden md:flex flex-1 justify-center">
-            <span className="px-5 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 font-semibold tracking-wide shadow-sm">
-              First-Time Users Get <span className="text-yellow-300">40% OFF</span> + Free Resume Checkup
-            </span>
-          </div>
+          {siteConfig.promo.active && (
+            <div className="hidden md:flex flex-1 justify-center">
+              <span className="px-5 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 font-semibold tracking-wide shadow-sm">
+                {siteConfig.promo.text}
+              </span>
+            </div>
+          )}
 
           <div className="flex items-center gap-2">
             {socials.map((item) => (

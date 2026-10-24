@@ -16,8 +16,8 @@ const CTASection = () => {
             <p className="text-sm md:text-base text-white/90 mb-4 max-w-md">
               Share your project requirements and get expert guidance tailored to your academic or technical needs.
             </p>
-            <p className="text-sm text-emerald-200 font-medium mb-6">
-              ✔ 1000+ Projects Completed • ✔ 100% Confidential • ✔ Expert Mentorship
+            <p className="text-sm text-emerald-100 font-medium mb-6">
+              ✔ Quote before work starts • ✔ Confidential handling • ✔ Explanation sessions included
             </p>
             <Button
               asChild
@@ -25,7 +25,7 @@ const CTASection = () => {
               className="border-white/40 bg-white/10 text-white hover:bg-white/20 backdrop-blur rounded-full px-8 py-5 font-semibold transition-all hover:scale-105"
             >
               <a href={siteConfig.whatsapp} target="_blank" rel="noopener noreferrer">
-                💬 Chat on WhatsApp
+                Chat on WhatsApp
               </a>
             </Button>
           </div>

@@ -1,14 +1,15 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Check, FileText, PhoneCall, Wallet, Settings, CheckCircle } from "lucide-react";
 
 const qualityFeatures = [
   "Expert-Guided Learning",
   "Concept Clarity & Explanation",
-  "Plagiarism-Free Work",
+  "Similarity-Checked Deliverables",
   "On-Time Project Delivery",
   "Practical Implementation",
-  "Complete Confidentiality",
+  "Confidential Handling of Your Details",
 ];
 
 const howItWorks = [
@@ -25,12 +26,11 @@ const QualitySection = () => {
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-14 items-center mb-28">
           <div>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/Growth-analytics-rafiki.svg" alt="Project quality and guidance illustration" className="w-full max-w-lg mx-auto animate-float" />
+            <Image src="/images/Growth-analytics-rafiki.svg" alt="Illustration of growth analytics and project guidance" width={512} height={512} className="w-full max-w-lg h-auto mx-auto animate-float" />
           </div>
 
           <div className="animate-fade-in-up">
-            <span className="badge-pill bg-green-100 text-green-700 mb-6 inline-block">QUALITY YOU CAN TRUST</span>
+            <span className="badge-pill bg-green-100 text-green-800 mb-6 inline-block">QUALITY YOU CAN TRUST</span>
             <h2 className="section-title text-xl md:text-2xl mb-4">What Does Quality Mean at ProjectDuniya?</h2>
             <p className="text-muted-foreground mb-10 max-w-lg">
               At ProjectDuniya, quality means guided learning, clear explanations, practical implementation, and timely delivery — ensuring students truly understand their projects.
@@ -46,7 +46,7 @@ const QualitySection = () => {
             </div>
 
             <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-none px-8 py-6">
-              <Link href="/contact">GET PROJECT GUIDANCE</Link>
+              <Link href="/contact" data-track="quality_cta_click">GET PROJECT GUIDANCE</Link>
             </Button>
           </div>
         </div>
@@ -76,12 +76,12 @@ const QualitySection = () => {
             })}
           </div>
 
-          <div className="text-center mt-18">
+          <div className="text-center">
             <Button className="mt-16 px-10 py-6 rounded-full bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition" asChild>
               <Link href="/contact">Start Your Project Now</Link>
             </Button>
             <p className="text-xs text-muted-foreground mt-4">
-              No hidden charges • Student-friendly pricing • 100% confidentiality
+              Quote confirmed before work starts • Student-friendly pricing • Confidential handling
             </p>
           </div>
         </div>

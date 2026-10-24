@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Script from "next/script";
+import { pageMeta } from "@/lib/seo";
 import PageHeader from "@/components/PageHeader";
 import {
   Accordion,
@@ -10,12 +10,12 @@ import {
 import { faqs } from "@/lib/data/faqs";
 import { siteConfig } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Frequently Asked Questions",
   description:
     "Answers to common questions about ProjectDuniya's academic project help, pricing, delivery timelines, confidentiality, and viva support.",
-  alternates: { canonical: "/faq" },
-};
+  path: "/faq",
+});
 
 export default function FAQPage() {
   const jsonLd = {
@@ -30,7 +30,7 @@ export default function FAQPage() {
 
   return (
     <main>
-      <Script id="faq-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <PageHeader
         title="Frequently Asked Questions"
         description="Everything you need to know about working with ProjectDuniya."
@@ -51,7 +51,7 @@ export default function FAQPage() {
           <div className="text-center mt-14">
             <p className="text-muted-foreground mb-2">Still have questions?</p>
             <a href={siteConfig.whatsapp} target="_blank" rel="noopener noreferrer" className="text-blue-600 font-semibold hover:underline">
-              Chat with our experts on WhatsApp
+              Chat with our team on WhatsApp
             </a>
           </div>
         </div>

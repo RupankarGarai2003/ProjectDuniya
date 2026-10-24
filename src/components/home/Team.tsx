@@ -28,14 +28,14 @@ const Team = () => {
               </div>
               <h3 className="font-bold text-navy mb-2">{member.name}</h3>
               <p className="text-sm text-muted-foreground mb-4 line-clamp-3">{member.desc}</p>
-              <div className="flex justify-center gap-3">
+              <div className="flex justify-center gap-3 min-h-4">
                 {member.linkedin && (
-                  <a href={member.linkedin} className="text-muted-foreground hover:text-primary transition" aria-label={`${member.name} on LinkedIn`}>
+                  <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition" aria-label={`${member.name} on LinkedIn`}>
                     <Linkedin className="w-4 h-4" />
                   </a>
                 )}
                 {member.github && (
-                  <a href={member.github} className="text-muted-foreground hover:text-primary transition" aria-label={`${member.name} on GitHub`}>
+                  <a href={member.github} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition" aria-label={`${member.name} on GitHub`}>
                     <Github className="w-4 h-4" />
                   </a>
                 )}
@@ -55,7 +55,7 @@ const Team = () => {
             </button>
             <div className="flex gap-2">
               {Array.from({ length: totalPages }).map((_, i) => (
-                <div key={i} className={`w-8 h-2 rounded-full ${i === page ? "bg-primary" : "bg-navy/30"}`} />
+                <div key={i} aria-hidden="true" className={`w-8 h-2 rounded-full ${i === page ? "bg-primary" : "bg-navy/30"}`} />
               ))}
             </div>
             <button

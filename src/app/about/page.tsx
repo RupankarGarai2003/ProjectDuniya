@@ -1,22 +1,23 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import PageHeader from "@/components/PageHeader";
 import { Check } from "lucide-react";
 import { siteConfig } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "About Us",
   description:
-    "Learn about ProjectDuniya - a team helping 1000+ students worldwide with final year projects, coding help, and academic support since inception.",
-  alternates: { canonical: "/about" },
-};
+    "Learn about ProjectDuniya - a team helping students worldwide with final year projects, coding help, and academic support.",
+  path: "/about",
+});
 
 const values = [
   { title: "Clarity Over Copy-Paste", desc: "We explain every concept so you can defend your project confidently, not just submit it." },
   { title: "On-Time, Every Time", desc: "Deadlines are non-negotiable in academics, and we plan our timelines around yours." },
   { title: "Affordable for Students", desc: "Transparent, student-friendly pricing with no hidden charges." },
-  { title: "100% Confidential", desc: "Your personal details and project data are never shared with anyone." },
+  { title: "Confidential Handling", desc: "Your personal details and project data are used only to deliver your project and are not sold or shared for marketing. See our Privacy Policy for the tools we rely on." },
 ];
 
 export default function AboutPage() {
@@ -47,7 +48,7 @@ export default function AboutPage() {
             component, because a project you can&apos;t explain in your viva isn&apos;t truly finished.
           </p>
           <p className="text-muted-foreground leading-relaxed mb-10">
-            Over the past few years, we&apos;ve worked with 1000+ students across diploma, undergraduate, and postgraduate
+            Over the past few years, we&apos;ve worked with students across diploma, undergraduate, and postgraduate
             programs, building everything from web applications and machine learning models to research papers and
             career-ready resumes.
           </p>
@@ -64,28 +65,28 @@ export default function AboutPage() {
             ))}
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center bg-light-purple/30 rounded-2xl p-8 mb-14">
-            <div>
-              <p className="text-3xl font-extrabold text-primary">1000+</p>
-              <p className="text-sm text-muted-foreground">Projects Completed</p>
-            </div>
-            <div>
-              <p className="text-3xl font-extrabold text-primary">24/7</p>
-              <p className="text-sm text-muted-foreground">Expert Support</p>
-            </div>
-            <div>
-              <p className="text-3xl font-extrabold text-primary">100%</p>
-              <p className="text-sm text-muted-foreground">Confidential</p>
-            </div>
-            <div>
-              <p className="text-3xl font-extrabold text-primary">4+ Years</p>
+          <ul className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center bg-light-purple/30 rounded-2xl p-8 mb-14">
+            <li>
+              <p className="text-3xl font-extrabold text-primary">{siteConfig.claims.projectsLabel}</p>
+              <p className="text-sm text-muted-foreground">Projects Delivered</p>
+            </li>
+            <li>
+              <p className="text-3xl font-extrabold text-primary">{siteConfig.claims.experienceLabel}</p>
               <p className="text-sm text-muted-foreground">Experience</p>
-            </div>
-          </div>
+            </li>
+            <li>
+              <p className="text-3xl font-extrabold text-primary">Online</p>
+              <p className="text-sm text-muted-foreground">Students Worldwide</p>
+            </li>
+            <li>
+              <p className="text-3xl font-extrabold text-primary">WhatsApp</p>
+              <p className="text-sm text-muted-foreground">Call &amp; Email Support</p>
+            </li>
+          </ul>
 
           <div className="text-center">
             <Button asChild size="lg" className="rounded-full px-10">
-              <Link href="/contact">Talk to Our Team</Link>
+              <Link href="/contact" data-track="about_cta_click">Talk to Our Team</Link>
             </Button>
           </div>
         </div>

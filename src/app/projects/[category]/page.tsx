@@ -1,25 +1,31 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import PageHeader from "@/components/PageHeader";
 import { categories, getCategoryBySlug } from "@/lib/data/categories";
+import { pageMeta } from "@/lib/seo";
+
+type Params = Promise<{ category: string }>;
 
 export function generateStaticParams() {
   return categories.map((c) => ({ category: c.slug }));
 }
 
-export function generateMetadata({ params }: { params: { category: string } }): Metadata {
-  const category = getCategoryBySlug(params.category);
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const { category: slug } = await params;
+  const category = getCategoryBySlug(slug);
   if (!category) return {};
-  return {
+  return pageMeta({
     title: category.metaTitle,
     description: category.metaDescription,
-    alternates: { canonical: `/projects/${category.slug}` },
-  };
+    path: `/projects/${category.slug}`,
+  });
 }
 
-export default function CategoryPage({ params }: { params: { category: string } }) {
-  const category = getCategoryBySlug(params.category);
+export default async function CategoryPage({ params }: { params: Params }) {
+  const { category: slug } = await params;
+  const category = getCategoryBySlug(slug);
   if (!category) notFound();
 
   return (
@@ -36,14 +42,9 @@ export default function CategoryPage({ params }: { params: { category: string } 
             {category.items.map((item) => (
               <Link href={`/projects/${category.slug}/${item.slug}`} key={item.slug} className="group cursor-pointer">
                 <div className="relative mb-4 aspect-square flex items-center justify-center bg-card rounded-2xl border border-border">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={item.image} alt={item.name} className="w-[65%] h-[65%] object-contain transition-transform duration-500 group-hover:scale-110" />
+                  <Image src={item.image} alt="" width={200} height={200} className="w-[65%] h-[65%] object-contain transition-transform duration-500 group-hover:scale-110" />
                 </div>
                 <h3 className="font-semibold text-navy text-center">{item.name}</h3>
-                <div className="flex justify-center items-center gap-1">
-                  <span className="w-2 h-2 rounded-full bg-green-500"></span>
-                  <span className="text-sm text-green-600 font-semibold">{item.count} Projects Completed</span>
-                </div>
               </Link>
             ))}
           </div>

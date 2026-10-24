@@ -1,22 +1,22 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import Link from "next/link";
 import { MapPin, ArrowRight } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import { countries } from "@/lib/data/countries";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Countries We Serve",
-  description:
-    "ProjectDuniya provides online final year project and academic help to students across 30 countries worldwide, including the US, UK, Canada, Australia, UAE, Singapore, and India.",
-  alternates: { canonical: "/locations" },
-};
+  description: `ProjectDuniya provides online final year project and academic help to students across ${countries.length} countries worldwide, including the US, UK, Canada, Australia, UAE, Singapore, and India.`,
+  path: "/locations",
+});
 
 export default function LocationsPage() {
   return (
     <main>
       <PageHeader
         title="Countries We Serve"
-        description="We work with students online, wherever they are - here are the countries where we have an especially active student community."
+        description="We work with students online, wherever they are - these are the countries we currently list. Students elsewhere are welcome too."
         crumbs={[{ label: "Locations" }]}
       />
 
@@ -29,7 +29,7 @@ export default function LocationsPage() {
                 key={c.slug}
                 className="bg-card border border-border rounded-2xl p-6 text-center hover:border-primary hover:shadow-lg transition group"
               >
-                <MapPin className="w-6 h-6 text-primary mx-auto mb-3" />
+                <MapPin className="w-6 h-6 text-primary mx-auto mb-3" aria-hidden="true" />
                 <h2 className="font-bold text-navy mb-1">{c.name}</h2>
                 <p className="text-xs text-muted-foreground mb-4">
                   {c.cities.length} {c.cities.length === 1 ? "city" : "cities"}
