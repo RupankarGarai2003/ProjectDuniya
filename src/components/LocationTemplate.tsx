@@ -1,3 +1,4 @@
+import BlogBridge from "@/components/BlogBridge";
 import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import { Button } from "@/components/ui/button";
@@ -83,6 +84,8 @@ export default function LocationTemplate({ country }: { country: Country }) {
             )}
             .
           </p>
+
+          <BlogBridge className="mb-12" campaign="location_page" />
 
           <div className="bg-gradient-to-br from-indigo-600 to-purple-600 rounded-2xl p-8 text-white text-center">
             <h2 className="text-xl font-bold mb-3">Start Your Project from {country.name} Today</h2>

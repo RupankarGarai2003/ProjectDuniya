@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { siteConfig } from "@/lib/site";
 import { trackEvent } from "@/lib/analytics";
@@ -39,6 +39,15 @@ const ContactForm = () => {
   const [error, setError] = useState("");
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [today, setToday] = useState<string | undefined>(undefined);
+  const requirementsRef = useRef<HTMLTextAreaElement>(null);
+
+  // Prefill from links such as /contact?idea=Disease+prediction (Project Ideas page).
+  useEffect(() => {
+    const idea = new URLSearchParams(window.location.search).get("idea");
+    if (idea && requirementsRef.current && !requirementsRef.current.value) {
+      requirementsRef.current.value = `I'm interested in this project idea: ${idea.slice(0, 160)}\n\nMy department guidelines / deadline: `;
+    }
+  }, []);
 
   const started = useRef(false);
   const submitting = useRef(false);
@@ -361,6 +370,7 @@ const ContactForm = () => {
           </label>
 
           <textarea
+            ref={requirementsRef}
             name="requirements"
             required
             rows={4}

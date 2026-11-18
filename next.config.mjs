@@ -13,10 +13,13 @@ const securityHeaders = [
 ];
 
 const nextConfig = {
+  devIndicators: false,
   reactStrictMode: true,
   poweredByHeader: false,
   images: {
     formats: ["image/avif", "image/webp"],
+    // Featured images of the WordPress blog hub (homepage "Fresh from the Blog" block).
+    remotePatterns: [{ protocol: "https", hostname: "blogs.projectduniya.com", pathname: "/wp-content/uploads/**" }],
   },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];

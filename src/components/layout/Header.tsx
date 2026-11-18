@@ -7,14 +7,16 @@ import { usePathname } from "next/navigation";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/site";
+import { blogLink } from "@/lib/blog-hub";
 
-const navItems = [
+const navItems: { label: string; href: string; external?: boolean }[] = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Projects", href: "/projects" },
   { label: "Project Ideas", href: "/project-ideas" },
-  { label: "Blog", href: "/blog" },
+  { label: "Guides", href: "/blog" },
+  { label: "Blog", href: blogLink("", "header_nav"), external: true },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -36,7 +38,7 @@ const Header = () => {
     return () => document.removeEventListener("keydown", onKey);
   }, [isOpen]);
 
-  const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
+  const isActive = (href: string) => !href.startsWith("http") && (href === "/" ? pathname === "/" : pathname.startsWith(href));
 
   return (
     <header className="sticky top-0 z-50 bg-background/90 backdrop-blur border-b border-border">
@@ -46,19 +48,21 @@ const Header = () => {
           <span className="text-xl font-bold tracking-tight text-navy leading-none">{siteConfig.name}</span>
         </Link>
 
-        <nav aria-label="Main" className="hidden lg:flex items-center gap-8">
-          {navItems.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              aria-current={isActive(item.href) ? "page" : undefined}
-              className={`relative text-sm font-medium transition-colors after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-primary after:transition-all hover:after:w-full ${
-                isActive(item.href) ? "text-primary after:w-full" : "text-foreground after:w-0"
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
+        <nav aria-label="Main" className="hidden lg:flex items-center gap-6">
+          {navItems.map((item) => {
+            const cls = `relative text-sm font-medium transition-colors after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-primary after:transition-all hover:after:w-full ${
+              isActive(item.href) ? "text-primary after:w-full" : "text-foreground after:w-0"
+            }`;
+            return item.external ? (
+              <a key={item.label} href={item.href} className={cls} data-track="nav_blog_hub_click">
+                {item.label} <span aria-hidden="true">↗</span>
+              </a>
+            ) : (
+              <Link key={item.label} href={item.href} aria-current={isActive(item.href) ? "page" : undefined} className={cls}>
+                {item.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="hidden lg:flex items-center gap-3">
@@ -87,17 +91,18 @@ const Header = () => {
       {isOpen && (
         <div id="mobile-menu" className="lg:hidden border-t border-border bg-background">
           <nav aria-label="Mobile" className="container mx-auto px-4 py-4 flex flex-col gap-4">
-            {navItems.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                aria-current={isActive(item.href) ? "page" : undefined}
-                onClick={() => setIsOpen(false)}
-                className={`text-sm font-medium py-2 border-b border-border text-left ${isActive(item.href) ? "text-primary" : ""}`}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              const cls = `text-sm font-medium py-2 border-b border-border text-left ${isActive(item.href) ? "text-primary" : ""}`;
+              return item.external ? (
+                <a key={item.label} href={item.href} onClick={() => setIsOpen(false)} className={cls} data-track="nav_blog_hub_click">
+                  {item.label} ↗
+                </a>
+              ) : (
+                <Link key={item.label} href={item.href} aria-current={isActive(item.href) ? "page" : undefined} onClick={() => setIsOpen(false)} className={cls}>
+                  {item.label}
+                </Link>
+              );
+            })}
             <Button asChild className="mt-4 w-full">
               <Link href="/contact" onClick={() => setIsOpen(false)} className="flex items-center justify-center gap-2" data-track="header_cta_click">
                 Get Custom Project

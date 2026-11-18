@@ -2,6 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { services } from "@/lib/data/services";
+import { serviceCatalog, catalogItemCount } from "@/lib/data/service-catalog";
+import { ideaCount } from "@/lib/data/project-ideas";
 
 const ServicesSection = () => {
   return (
@@ -39,6 +41,30 @@ const ServicesSection = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="mt-14 rounded-2xl border border-border bg-card p-6 md:p-8">
+          <h3 className="text-lg font-bold text-navy text-center">
+            Everything we offer - {catalogItemCount} services in {serviceCatalog.length} categories
+          </h3>
+          <ul className="mt-5 flex flex-wrap justify-center gap-2">
+            {serviceCatalog.map((g) => (
+              <li key={g.id}>
+                <Link
+                  href={`/services#${g.id}`}
+                  className="inline-block rounded-full border border-indigo-200 bg-white px-4 py-1.5 text-xs font-semibold text-indigo-700 transition hover:bg-indigo-600 hover:text-white"
+                >
+                  {g.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-5 text-center text-sm text-muted-foreground">
+            Not sure what to build?{" "}
+            <Link href="/project-ideas" className="font-semibold text-primary hover:underline">
+              Browse {ideaCount}+ project ideas →
+            </Link>
+          </p>
         </div>
 
         <div className="text-center mt-10">

@@ -3,6 +3,7 @@ import { pageMeta } from "@/lib/seo";
 import PageHeader from "@/components/PageHeader";
 import BlogCard from "@/components/BlogCard";
 import { blogPosts } from "@/lib/data/blog";
+import BlogBridge from "@/components/BlogBridge";
 
 export const metadata: Metadata = pageMeta({
   title: "Blog - Guides & Ideas for Students",
@@ -30,6 +31,13 @@ export default function BlogPage() {
             {blogPosts.map((post, i) => (
               <BlogCard key={post.slug} post={post} priority={i < 3} />
             ))}
+          </div>
+          <div className="max-w-6xl mx-auto mt-16">
+            <BlogBridge
+              campaign="guides_page"
+              title="Looking for more articles?"
+              description="Our Blog Hub has fresh project ideas, AI and programming tutorials, career guides and tech news."
+            />
           </div>
         </div>
       </section>

@@ -5,17 +5,59 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import { services } from "@/lib/data/services";
+import ServiceCatalog from "@/components/ServiceCatalog";
+import BlogBridge from "@/components/BlogBridge";
+import { serviceCatalog, catalogItemCount } from "@/lib/data/service-catalog";
+import { siteConfig } from "@/lib/site";
+import { absoluteUrl } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
-  title: "Our Services",
+  title: "Our Services - Projects, Development, AI, Testing & Research Help",
   description:
-    "Explore all ProjectDuniya services - final year projects, website & software development, data/AI projects, research writing, and presentation support.",
+    "All 46 ProjectDuniya services in one place: B.Tech/MCA/BCA final-year projects, web & Android development, AI/ML, Power BI, software testing & QA, research papers, SRS, UML and viva preparation.",
   path: "/services",
+  keywords: [
+    "final year project help",
+    "software development services for students",
+    "software testing services",
+    "AI machine learning projects",
+    "website development services",
+    "research paper assistance",
+    "Power BI dashboard development",
+  ],
 });
+
+const catalogJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "OfferCatalog",
+      "@id": `${absoluteUrl("/services")}#catalog`,
+      name: "ProjectDuniya Services",
+      numberOfItems: catalogItemCount,
+      itemListElement: serviceCatalog.map((g) => ({
+        "@type": "OfferCatalog",
+        name: g.title,
+        itemListElement: g.items.map((i) => ({
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: i.title,
+            description: i.summary,
+            url: absoluteUrl(`/services/${i.serviceSlug}`),
+            provider: { "@id": `${siteConfig.url}/#organization` },
+            areaServed: "Worldwide",
+          },
+        })),
+      })),
+    },
+  ],
+};
 
 export default function ServicesPage() {
   return (
     <main>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(catalogJsonLd) }} />
       <PageHeader
         title="Our Services"
         description="From final year projects to career-ready resumes - explore every way ProjectDuniya can help."
@@ -46,6 +88,18 @@ export default function ServicesPage() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      <ServiceCatalog />
+
+      <section className="py-14 bg-background">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <BlogBridge
+            campaign="services_page"
+            title="Guides behind every service"
+            description="Read practical tutorials and project ideas on our blog before you start."
+          />
         </div>
       </section>
     </main>

@@ -5,6 +5,7 @@ import { FaWhatsapp, FaInstagram, FaTelegramPlane, FaFacebookF, FaEnvelope } fro
 import { siteConfig } from "@/lib/site";
 import { categories } from "@/lib/data/categories";
 import { countries } from "@/lib/data/countries";
+import { blogLink, blogCategoryLink, blogTopics } from "@/lib/blog-hub";
 
 const Footer = () => {
   return (
@@ -44,7 +45,9 @@ const Footer = () => {
               <li><Link href="/contact" className="hover:text-primary transition-colors">Custom Project?</Link></li>
               <li><Link href="/about" className="hover:text-primary transition-colors">About</Link></li>
               <li><Link href="/services" className="hover:text-primary transition-colors">Our Services</Link></li>
-              <li><Link href="/blog" className="hover:text-primary transition-colors">Blog</Link></li>
+              <li><Link href="/project-ideas" className="hover:text-primary transition-colors">Project Ideas (120+)</Link></li>
+              <li><Link href="/blog" className="hover:text-primary transition-colors">Student Guides</Link></li>
+              <li><a href={blogLink("", "footer")} className="hover:text-primary transition-colors font-semibold">Blog Hub ↗</a></li>
               {/* <li><Link href="/pricing" className="hover:text-primary transition-colors">Pricing</Link></li> */}
               <li><Link href="/team" className="hover:text-primary transition-colors">Our Team</Link></li>
               <li><Link href="/faq" className="hover:text-primary transition-colors">FAQ</Link></li>
@@ -66,6 +69,14 @@ const Footer = () => {
           </div>
 
           <div>
+            <h2 className="font-bold text-navy mb-6 text-base">From the Blog</h2>
+            <ul className="space-y-3 text-muted-foreground mb-8">
+              {blogTopics.slice(0, 4).map((t) => (
+                <li key={t.key}>
+                  <a href={blogCategoryLink(t.key, "footer")} className="hover:text-primary transition-colors">{t.label}</a>
+                </li>
+              ))}
+            </ul>
             <h2 className="font-bold text-navy mb-6 text-base">Countries We Serve</h2>
             <ul className="space-y-3 text-muted-foreground">
               {countries.slice(0, 6).map((c) => (

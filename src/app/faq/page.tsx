@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { pageMeta } from "@/lib/seo";
+import BlogBridge from "@/components/BlogBridge";
 import PageHeader from "@/components/PageHeader";
 import {
   Accordion,
@@ -47,6 +48,8 @@ export default function FAQPage() {
               </AccordionItem>
             ))}
           </Accordion>
+
+          <BlogBridge className="mt-14" campaign="faq_page" />
 
           <div className="text-center mt-14">
             <p className="text-muted-foreground mb-2">Still have questions?</p>

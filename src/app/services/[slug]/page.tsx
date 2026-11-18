@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { services, getServiceBySlug } from "@/lib/data/services";
 import { getPostsForService } from "@/lib/data/blog";
 import { siteConfig } from "@/lib/site";
+import BlogBridge from "@/components/BlogBridge";
+import { serviceBlogMap } from "@/lib/blog-hub";
 import { absoluteUrl, pageMeta } from "@/lib/seo";
 
 type Params = Promise<{ slug: string }>;
@@ -108,6 +110,14 @@ export default async function ServiceDetailPage({ params }: { params: Params }) 
                   </div>
                 ))}
               </div>
+
+              <BlogBridge
+                className="mt-12"
+                campaign={`service_${service.slug}`}
+                title={`More on ${service.title} from our blog`}
+                description="Tutorials, project ideas and practical guides related to this service."
+                topics={serviceBlogMap[service.slug]}
+              />
 
               {guides.length > 0 && (
                 <>

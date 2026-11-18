@@ -7,6 +7,8 @@ export const siteConfig = {
   description:
     "Final year project ideas, coding help, AI, web development, thesis and data analysis guidance for students worldwide - delivered online with clear explanations and viva preparation.",
   url: "https://www.projectduniya.com",
+  // Blog hub (WordPress) - lives on a subdomain. Single source of truth for every blog link.
+  blogUrl: "https://blogs.projectduniya.com",
   ogImage: "/og-default.jpg", // 1200x630
   logo: "/logo-512.png",
   phone: "+918391808784",
@@ -42,6 +44,10 @@ export const siteConfig = {
     "thesis writing help",
     "data analysis projects",
     "viva preparation",
+    "software testing services for students",
+    "mini project ideas",
+    "BCA MCA B.Tech project help",
+    "Power BI dashboard development",
   ],
 };
 

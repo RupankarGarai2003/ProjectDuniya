@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { blogLink } from "@/lib/blog-hub";
 
 export const metadata: Metadata = { title: "Page Not Found", robots: { index: false, follow: true } };
 
@@ -16,6 +17,8 @@ export default function NotFound() {
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Button asChild><Link href="/">Back to Home</Link></Button>
           <Button asChild variant="outline"><Link href="/blog/top-final-year-project-ideas-computer-science-2026">Final Year Project Ideas</Link></Button>
+          <Button asChild variant="outline"><Link href="/project-ideas">Project Ideas</Link></Button>
+          <Button asChild variant="outline"><a href={blogLink("", "404")}>Visit Our Blog</a></Button>
           <Button asChild variant="outline"><Link href="/contact">Contact Us</Link></Button>
         </div>
       </div>
